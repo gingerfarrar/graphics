@@ -21,7 +21,7 @@ int main()
 	unsigned idxs[19] = { 1,2,0,2,3,0,3,4,0,4,5,0,5,6,0,6,1,0,1 };
 
 	Geometry g = makeGeometry(verts, 7, idxs, 19);
-	Geometry gt = makeNGon(6, .5f);
+	Geometry gt = makeCheckerBoard(4, 1);
 
 	const char* vsource =
 		"#version 450\n"

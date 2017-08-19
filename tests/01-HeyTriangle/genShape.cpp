@@ -2,6 +2,7 @@
 #include "graphics\Vertex.h"
 #include "glm\glm.hpp"
 #include "genShape.h"
+#include <random>
 
 Geometry makeNGon(size_t N, float r)
 {
@@ -35,24 +36,39 @@ Geometry makeNGon(size_t N, float r)
 	return ret;
 }
 
-Geometry makeCheckerBoard(int dim, int size)
+Geometry makeCheckerBoard(int dim, float size)
 {
-	int N = (dim + 1)*(dim + 1);
-	unsigned vsize = (dim + 1)*(dim + 1);
-
+	int vdim = dim + 1;
+	unsigned vsize = vdim*vdim;
 	unsigned isize = 3 * 2 * dim*dim;
 	Vertex *verts = new Vertex[vsize];
 	unsigned *idxs = new unsigned[isize];
 
-	float step = dim / (float)size;
+	float step = size / dim;
+	float offset = size / 2; 
+	int l = 0;
 
-	for (int i = 0; i < dim; ++i)
+	for (int i = 0; i < vsize; ++i)
 	{
-		float y = i*step;
-		
-		for (int j = 0; j < dim; ++j)
+		float x = (i % vdim)*step - offset;
+		float y = (i / vdim)*step - offset;
+
+		verts[i].position = {x,y,0,1};
+		verts[i].color = {rand() / (float)RAND_MAX,
+			rand() / (float)RAND_MAX,
+			rand() / (float)RAND_MAX ,1};
+
+		if (i % vdim != vdim -1 && 
+			i / vdim != vdim-1)
 		{
-			float x = j*step;			
+			idxs[l++] = i;
+			idxs[l++] = i + 1;
+			idxs[l++] = i + vdim;
+
+			idxs[l++] = i + 1;
+			idxs[l++] = i + vdim;
+			idxs[l++] = i + vdim + 1;
+
 		}
 	}
 

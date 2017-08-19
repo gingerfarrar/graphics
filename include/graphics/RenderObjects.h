@@ -27,3 +27,14 @@ struct FrameBuffer
 {
 	unsigned handle, width, height;
 };
+
+struct Texture
+{
+	unsigned handle;
+};
+
+//rgba = 4 channels
+Texture makeTexture(unsigned w, unsigned h, unsigned c,
+										const unsigned char *pixels);
+
+void freeTexture(Texture &t);
