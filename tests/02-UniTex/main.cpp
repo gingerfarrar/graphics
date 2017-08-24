@@ -67,7 +67,7 @@ int main()
 	//delete everything
 	freeGeometry(g);
 	freeShader(s);
-
+	freeTexture(t_magyel);
 	context.term();
 	return 0;
 }
