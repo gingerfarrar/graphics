@@ -39,6 +39,10 @@ Geometry makeGeometry(const Vertex *verts, size_t vsize,
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
 		sizeof(Vertex), (void*)16);
 
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
+		sizeof(Vertex), (void*)32);
+
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -106,9 +110,9 @@ Shader makeShader(const char *vert_src, const char *frag_src)
 	if (success == GL_FALSE)
 	{
 		int length = 0;
-		glGetShaderiv(retval.handle, GL_INFO_LOG_LENGTH, &length);
+		glGetProgramiv(retval.handle, GL_INFO_LOG_LENGTH, &length);
 		char *log = new char[length];
-		glGetShaderInfoLog(retval.handle, length, 0, log);
+		glGetProgramInfoLog(retval.handle, length, 0, log);
 		std::cerr << log << std::endl;
 		delete[] log;
 	}
