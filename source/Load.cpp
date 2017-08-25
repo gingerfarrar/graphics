@@ -65,12 +65,15 @@ Geometry loadGeometry(const char *path)
 	std::vector<tinyobj::shape_t> shapes;
 	std::vector<tinyobj::material_t> materials;
 	std::string err;
-	tinyobj::LoadObj(&attrib, &shapes, &materials, &err, path);
 
-	size_t vsize = attrib.vertices.size() / 3;
-	Vertex *verts = new Vertex[vsize];
+	tinyobj::LoadObj(&attrib, &shapes, &materials, &err, path);
+	
 	size_t isize = shapes[0].mesh.indices.size();
 	size_t *indices = new unsigned[isize];
+
+	size_t vsize = isize;
+	Vertex *verts = new Vertex[vsize];
+	
 	for (int i = 0; i < isize; ++i)
 	{
 		indices[i] = i;
@@ -82,7 +85,7 @@ Geometry loadGeometry(const char *path)
 
 		const float *p = &attrib.vertices[pi * 3];
 		const float *n = &attrib.normals[ni * 3];
-		const float *t = &attrib.vertices[ti * 2];
+		const float *t = &attrib.texcoords[ti * 2];
 
 		verts[i].position = { p[0],p[1],p[2],1 };
 		verts[i].texcoord = { t[0],t[1] };
