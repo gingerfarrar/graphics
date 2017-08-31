@@ -29,6 +29,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shaders", "resources\shader
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05-mvp", "tests\05-mvp\05-mvp.vcxproj", "{B54B0CA2-DE49-4201-8E72-440FB1BA7C6B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "07-Materials", "tests\07-Materials\07-Materials.vcxproj", "{C5EA5EE5-57C4-4688-ABA6-98285031929C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1ADDD791-86F8-484F-A495-5018A0263612} = {1ADDD791-86F8-484F-A495-5018A0263612}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -93,6 +98,14 @@ Global
 		{B54B0CA2-DE49-4201-8E72-440FB1BA7C6B}.Release|x64.Build.0 = Release|x64
 		{B54B0CA2-DE49-4201-8E72-440FB1BA7C6B}.Release|x86.ActiveCfg = Release|Win32
 		{B54B0CA2-DE49-4201-8E72-440FB1BA7C6B}.Release|x86.Build.0 = Release|Win32
+		{C5EA5EE5-57C4-4688-ABA6-98285031929C}.Debug|x64.ActiveCfg = Debug|x64
+		{C5EA5EE5-57C4-4688-ABA6-98285031929C}.Debug|x64.Build.0 = Debug|x64
+		{C5EA5EE5-57C4-4688-ABA6-98285031929C}.Debug|x86.ActiveCfg = Debug|Win32
+		{C5EA5EE5-57C4-4688-ABA6-98285031929C}.Debug|x86.Build.0 = Debug|Win32
+		{C5EA5EE5-57C4-4688-ABA6-98285031929C}.Release|x64.ActiveCfg = Release|x64
+		{C5EA5EE5-57C4-4688-ABA6-98285031929C}.Release|x64.Build.0 = Release|x64
+		{C5EA5EE5-57C4-4688-ABA6-98285031929C}.Release|x86.ActiveCfg = Release|Win32
+		{C5EA5EE5-57C4-4688-ABA6-98285031929C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
