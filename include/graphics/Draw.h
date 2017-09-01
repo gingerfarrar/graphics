@@ -3,7 +3,7 @@
 #include "glm\gtc\type_ptr.hpp"
 #include "graphics\RenderObjects.h"
 
-void s0_draw(const FrameBuffer &f, const Shader &s, const Geometry &g);
+void s0_draw(const Framebuffer &f, const Shader &s, const Geometry &g);
 
 void setUniform(const Shader &s, int location, float value);
 
@@ -43,7 +43,7 @@ void setUniforms(const Shader &s, int &loc_io, int &tex_io, const T &val)
 	__internal::t_setUniform(s, loc_io, tex_io, val);
 }
 
-void clearFramebuffer(const FrameBuffer & r, bool color = true, bool depth = true);
+void clearFramebuffer(const Framebuffer & r, bool color = true, bool depth = true);
 
 enum RenderFlag {DEPTH = 1};
 void setFlags(int flags);

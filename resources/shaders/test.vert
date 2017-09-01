@@ -1,4 +1,4 @@
-// Graphics\resources\shaders\test.frag
+// Graphics\resources\shaders\test.vert
 #version 450
 out vec4 outColor;
 

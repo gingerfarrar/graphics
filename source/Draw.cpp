@@ -1,7 +1,7 @@
 #include "graphics\Draw.h"
 #include "glinc.h"
 
-void s0_draw(const FrameBuffer &f, const Shader &s, const Geometry &g)
+void s0_draw(const Framebuffer &f, const Shader &s, const Geometry &g)
 {
 	//what were using
 	glBindFramebuffer(GL_FRAMEBUFFER, f.handle);
@@ -39,7 +39,7 @@ void setUniform(const Shader &s, int location, const Texture &value, unsigned sl
 	glProgramUniform1i(s.handle, location, slot);
 }
 
-void clearFramebuffer(const FrameBuffer & r, bool color, bool depth)
+void clearFramebuffer(const Framebuffer & r, bool color, bool depth)
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, r.handle);
 	glClear(GL_COLOR_BUFFER_BIT * color | GL_DEPTH_BUFFER_BIT * depth);

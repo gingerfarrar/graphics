@@ -25,8 +25,11 @@ int main()
 
 	Shader standard = loadShader("../../resources/shaders/standard.vert",
 								 "../../resources/shaders/standard.frag");
-	FrameBuffer screen = { 0,800,600 };
 
+	Framebuffer screen = { 0,800,600 };
+	Framebuffer fbuffer = makeFramebuffer(800, 600, 4, true, 3, 1);
+	Shader fsq_shader = loadShader("../../resources/shaders/quad.vert",
+								   "../../resources/shaders/quad.frag");
 	//////////////////////////
 	//model data
 	Geometry ss_geo = loadGeometry("../../resources/models/soulspear.obj");
@@ -54,11 +57,10 @@ int main()
 	while (context.step())
 	{
 		float time = context.getTime();
-
 		ss_model = glm::rotate(time, glm::vec3(0, 1, 0));
 				
 
-		clearFramebuffer(screen);
+		clearFramebuffer(fbuffer);
 		setFlags(RenderFlag::DEPTH);
 
 		int loc = 0, slot = 0;
@@ -67,7 +69,14 @@ int main()
 			ss_model,ss_diffuse,ss_specular, ss_normal,ss_gloss, //model
 			l_dir,l_color,l_intensity,l_ambient,l_type); //light
 
-		s0_draw(screen, standard, ss_geo);
+		s0_draw(fbuffer, standard, ss_geo);
+
+		//screen pass
+		clearFramebuffer(screen);
+		loc = 0, slot = 0;
+		setUniforms(fsq_shader, loc, slot, fbuffer.targets[1], fbuffer.targets[2]);
+		s0_draw(screen, fsq_shader, quad);
+
 	}
 	context.term();
 	return 0;
