@@ -15,7 +15,7 @@ vec4 sobel(in sampler2D map, in vec2 UV);
 void main()
 {
 	//outColor = 4 * sobel(map1,vUV) + 8 * crossblur(map2, vUV,64);
-	//outColor = texture(map1, vUV) + sobel(map2,vUV);
+	outColor = texture(map1, vUV) + sobel(map2,vUV);
 }
 
 vec4 crossblur(in sampler2D map, in vec2 uv, in int it)
