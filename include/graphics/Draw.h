@@ -45,5 +45,8 @@ void setUniforms(const Shader &s, int &loc_io, int &tex_io, const T &val)
 
 void clearFramebuffer(const Framebuffer & r, bool color = true, bool depth = true);
 
-enum RenderFlag {DEPTH = 1};
+enum RenderFlag 
+{
+	NONE = 0, DEPTH = 1, ADDITIVE = 2
+};
 void setFlags(int flags);

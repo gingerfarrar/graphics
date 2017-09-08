@@ -32,32 +32,35 @@ int main()
 								   "../../resources/shaders/quad.frag");
 	//////////////////////////
 	//model data
-	Geometry ss_geo = loadGeometry("../../resources/models/soulspear.obj");
-	glm::mat4 ss_model;
+	specGloss ss;
+	ss.geo = loadGeometry("../../resources/models/soulspear.obj");
 
-	Texture ss_normal = loadTexture("../../resources/textures/soulspear_normal.tga");
-	Texture ss_diffuse = loadTexture("../../resources/textures/soulspear_diffuse.tga");
-	Texture ss_specular = loadTexture("../../resources/textures/soulspear_specular.tga");
-	float ss_gloss = 4.0f;
+	ss.normal = loadTexture("../../resources/textures/soulspear_normal.tga");
+	ss.diffuse = loadTexture("../../resources/textures/soulspear_diffuse.tga");
+	ss.specular = loadTexture("../../resources/textures/soulspear_specular.tga");
+	ss.gloss = 4.0f;
 	
-	/////////////////////////////////
+	/////////////////////////////
 	//camera
-	glm::mat4 cam_view = glm::lookAt(glm::vec3(0, 2, 3),
+	Camera cam;
+	cam.view = glm::lookAt(glm::vec3(0, 2, 3),
 									glm::vec3(0, 2, 0),
 									glm::vec3(0, 1, 0));
-	glm::mat4 cam_proj = glm::perspective(45.f, 800.f / 600.f, .01f, 100.f);
+	cam.proj = glm::perspective(45.f, 800.f / 600.f, .01f, 100.f);
 
+	/////////////////////////////
 	//light
-	glm::vec3 l_dir = glm::normalize(glm::vec3(.2, -1, -1));
-	glm::vec4 l_color = glm::vec4(1.0,.5,1.0,1);
-	float l_intensity = 1;
-	glm::vec4 l_ambient = glm::vec4(.2,.5,.1,1);
-	int l_type = 0;
+	StandardLight l;
+	l.dir = glm::normalize(glm::vec3(.2, -1, -1));
+	l.color = glm::vec4(1.0,.5,1.0,1);
+	l.intensity = 1;
+	l.ambient = glm::vec4(.2,.5,.1,1);
+	l.type = 0;
 
 	while (context.step())
 	{
 		float time = context.getTime();
-		ss_model = glm::rotate(time, glm::vec3(0, 1, 0));
+		ss.model = glm::rotate(time, glm::vec3(0, 1, 0));
 				
 
 		clearFramebuffer(fbuffer);
@@ -65,11 +68,11 @@ int main()
 
 		int loc = 0, slot = 0;
 		setUniforms(standard, loc, slot,
-			cam_proj, cam_view, //camera
-			ss_model,ss_diffuse,ss_specular, ss_normal,ss_gloss, //model
-			l_dir,l_color,l_intensity,l_ambient,l_type); //light
+			cam.proj, cam.view, //camera
+			ss.model,ss.diffuse,ss.specular, ss.normal,ss.gloss, //model
+			l.dir,l.color,l.intensity,l.ambient,l.type); //light
 
-		s0_draw(fbuffer, standard, ss_geo);
+		s0_draw(fbuffer, standard, ss.geo);
 
 		//screen pass
 		clearFramebuffer(screen);

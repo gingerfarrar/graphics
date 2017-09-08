@@ -1,5 +1,6 @@
 #pragma once
 //Graphics\include\graphics\GameObjects.h
+#include "RenderObjects.h"
 #include "Draw.h"
 #include "glm\glm.hpp"
 #include "glm\ext.hpp"
@@ -26,9 +27,62 @@ struct Camera
 
 	float fov = 45.f, aspect = 8.f / 6.f, near = 0.01f, far = 100.0f;
 
-	glm::mat4 getProjection() const;
-	glm::mat4 getView() const;
+	glm::mat4 proj;
+	glm::mat4 view;
 };
+
+struct specGloss
+{
+	Geometry geo;
+
+	glm::mat4 model;
+	Texture diffuse;
+	Texture specular;
+	Texture normal;
+	float gloss;
+};
+
+struct StandardLight
+{
+	glm::vec3 dir;
+	glm::vec4 color;
+	float intensity;
+	glm::vec4 ambient;
+	int type;
+
+};
+
+
+
+struct DirectionalLight
+{
+	glm::vec3 target;
+	float range;
+
+	glm::vec3 direction;
+	
+	glm::mat4 getProj() const { return glm::ortho<float>(-range,range, -range, range, -range, range); }
+	glm::mat4 getView() const { return glm::lookAt(-direction + target, target, glm::vec3(0, 1, 0)); }
+	
+	glm::vec4 color;
+	float intensity;
+
+	
+};
+struct SimplePresetScene
+{
+	Camera cam;
+	specGloss go[3];
+	DirectionalLight dl[2];
+
+	SimplePresetScene();
+};
+namespace __internal
+{
+	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const specGloss &val);
+	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Camera &val);
+	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const DirectionalLight &val);
+}
 
 struct Mesh
 {
@@ -37,29 +91,3 @@ struct Mesh
 	Geometry geometry;
 };
 
-struct FlyCam
-{
-	Camera camera;
-
-	float speed;
-	// add any members needed to keep track of input
-
-
-	// Check input and modify camera.transform accordingly
-	void update(float dt);
-};
-
-struct OrbitCam
-{
-	Camera camera;
-
-	float speed;
-	// add any members needed to keep track of input
-	glm::vec3 target;
-
-	// Check input and modify camera.transform accordingly
-	void update(float dt);
-};
-
-void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Camera &val);
-void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const FlyCam &val);

@@ -118,10 +118,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="cpass.frag" />
+    <None Include="cpass.vert" />
     <None Include="cube.frag" />
     <None Include="cube.vert" />
     <None Include="direct.frag" />
     <None Include="direct.vert" />
+    <None Include="gpass.frag" />
+    <None Include="gpass.vert" />
+    <None Include="lpassD.frag" />
+    <None Include="lpassD.vert" />
     <None Include="mvplite.frag" />
     <None Include="mvplite.vert" />
     <None Include="quad.frag" />
