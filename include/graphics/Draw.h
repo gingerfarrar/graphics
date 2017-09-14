@@ -11,6 +11,8 @@ void setUniform(const Shader &s, int location, int value);
 
 void setUniform(const Shader &s, int location, const Texture &value, unsigned slot);
 
+void setUniform(const Shader &s, int location, const Skybox &value, unsigned slot);
+
 //called each time the variatic unpacking recursion takes place 
 //based on what uniforms are passed in, the correct function will be called
 namespace __internal
@@ -18,6 +20,8 @@ namespace __internal
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, float val);
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, int val);
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Texture &val);
+	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Skybox &val);
+
 
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec3 &val);
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec4 &val);

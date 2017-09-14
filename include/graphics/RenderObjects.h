@@ -48,3 +48,8 @@ Framebuffer makeFramebuffer(unsigned w, unsigned h, unsigned c,
 							bool hasDepth, unsigned nTargets, unsigned nFloatTargets);
 
 void freeFramebuffer(Framebuffer &fb);
+
+struct Skybox
+{
+	unsigned handle;
+};
