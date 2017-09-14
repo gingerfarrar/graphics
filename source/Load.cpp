@@ -100,7 +100,6 @@ Geometry loadGeometry(const char *path)
 	delete[] indices;
 	return retval;
 }
-#include <iostream>
 Skybox loadCubeMap(std::vector<std::string> faces)
 {
 	Skybox retval;
